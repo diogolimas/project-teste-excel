@@ -50,7 +50,7 @@
 
             .links > a {
                 color: #636b6f;
-                padding: 0 25px;
+                padding: 0 0;
                 font-size: 13px;
                 font-weight: 600;
                 letter-spacing: .1rem;
@@ -60,6 +60,22 @@
 
             .m-b-md {
                 margin-bottom: 30px;
+            }
+            .danger{
+                background-color: red;
+                opacity: .7;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                margin-bottom: 30px;
+                color: white;
+            }
+            .success{
+                background-color: #4aff4a;
+                opacity: .7;
+                padding-top: 10px;
+                padding-bottom: 10px;
+                margin-bottom: 30px;
+                color: black;
             }
         </style>
     </head>
@@ -83,16 +99,58 @@
                 <div class="title m-b-md">
                     Laravel
                 </div>
+                @if(Session::has('error'))
+                    <div class="danger">
+                        {{Session::get('error')}}
+                    </div>
+                @elseif(Session::has('success'))
+                    <div class="success">
+                        {{Session::get('success')}}
+                    </div>
+                    
+                @endif
+                <form action="{{route('users.import')}}" method="post" enctype="multipart/form-data">
+                    @csrf
 
+                    <input type="file" name="arquivo_importacao" id="">
+                    <input type="submit" value="Importar">
+                </form>
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
+                    <table>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            CPF
+                        </th>
+                        <th>
+                            Email
+                        </th>
+                        <th>Idade</th>
+                        <th>Sexo</th>
+                        <th>Gestante</th>
+                    </tr>
+                    
+                    @forelse($users as $user)
+                    <tr>
+                        <td>
+                            $user->name
+                        </td>
+                        <td>
+                            $user->cpf
+                            
+                        </td>
+                        <td>
+                            $user->email
+                        </td>
+                        <td>$user->idade</td>
+                        <td>$user->sexo</td>
+                        <td>$user->gestante</td>
+                    </tr>
+                    @empty
+                    @endforelse
+                    </table>
                 </div>
             </div>
         </div>
