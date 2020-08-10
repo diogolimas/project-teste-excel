@@ -18,9 +18,9 @@ class UserController extends Controller
     }
     public function Usersimport(Request $request){
         try{
-            Excel::import(new UserImport, $request->file('arquivo_importacao'));
+            $file_importation = $request->file('arquivo_importacao');
+            Excel::import(new UserImport(), $file_importation);
             return redirect()->back()->with('success', 'Deu tudo certo!!!');
-            
         }catch(Throwable $e){
             dd($e);
             return redirect()->back()->with('error', $e->getMessage());

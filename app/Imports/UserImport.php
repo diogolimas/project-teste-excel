@@ -12,10 +12,14 @@ class UserImport implements ToModel
     *
     * @return \Illuminate\Database\Eloquent\Model|null
     */
+    public function startRow(): int
+    {
+        return 2;
+    }
     public function model(array $row)
     {   
         //dd("pare");
-        dd($row);
+       // dd($row);
         return new User([
             'name' => $row['name'],
             'email' => $row['email'],
@@ -25,4 +29,5 @@ class UserImport implements ToModel
             'gestante' => $row['gestante'],
         ]);
     }
+   
 }

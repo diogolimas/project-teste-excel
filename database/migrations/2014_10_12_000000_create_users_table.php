@@ -19,7 +19,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('cpf')->unique();
             $table->string('idade');
-            $table->char('sexo',1);
+            $table->string('sexo',1);
             $table->boolean('gestante')->defualt(false);
             $table->timestamps();
         });

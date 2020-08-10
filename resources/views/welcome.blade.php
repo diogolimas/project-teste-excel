@@ -135,18 +135,18 @@
                     @forelse($users as $user)
                     <tr>
                         <td>
-                            $user->name
+                            {{$user->name}}
                         </td>
                         <td>
-                            $user->cpf
+                            {{$user->cpf}}
                             
                         </td>
                         <td>
-                            $user->email
+                            {{$user->email}}
                         </td>
-                        <td>$user->idade</td>
-                        <td>$user->sexo</td>
-                        <td>$user->gestante</td>
+                        <td>{{$user->idade}}</td>
+                        <td>{{$user->sexo}}</td>
+                        <td>{{$user->gestante}}</td>
                     </tr>
                     @empty
                     @endforelse
